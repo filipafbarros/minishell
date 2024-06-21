@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keramos- <keramos-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 01:41:45 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/13 21:18:07 by keramos-         ###   ########.fr       */
+/*   Updated: 2024/06/21 10:47:32 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*exp_env_var(char *input, t_msh *msh)
  * shell structure.
  * Returns the updated result string and updates the index.
  */
-char *exp_special_var(const char *input, int *index, char *result, t_msh *msh)
+char	*exp_special_var(const char *input, int *index, char *result, t_msh *msh)
 {
 	int		j;
 	char	*var;
@@ -77,7 +77,7 @@ char *exp_special_var(const char *input, int *index, char *result, t_msh *msh)
  * shell structure.
  * Returns the updated result string and updates the index.
  */
-char *exp_general_var(const char *input, int *index, char *result, t_msh *msh)
+char	*exp_general_var(const char *input, int *index, char *result, t_msh *msh)
 {
 	int		j;
 	char	*var;
@@ -103,9 +103,10 @@ char *exp_general_var(const char *input, int *index, char *result, t_msh *msh)
  * Takes the input string, the current index, the result string, and the shell structure.
  * Returns the updated result string and updates the index.
  */
-char *exp_variable(const char *input, int *index, char *result, t_msh *msh)
+
+char	*exp_variable(const char *input, int *index, char *result, t_msh *msh)
 {
-	int j;
+	int	j;
 
 	j = *index + 1;
 
@@ -121,8 +122,8 @@ char *exp_variable(const char *input, int *index, char *result, t_msh *msh)
  */
 char	*exp_single_var(char *token, t_msh *msh)
 {
-	char *key;
-	char *value;
+	char	*key;
+	char	*value;
 
 	if (ft_strcmp(token, "$?") == 0)
 		return (ft_itoa(msh->exit_status));

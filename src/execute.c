@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keramos- <keramos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 13:54:08 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/14 14:30:12 by keramos-         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:34:32 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	execute_ast(t_ast *root, t_msh *msh)
 		return ; //handle_redirection(root, msh);
 	else if (root->op == AND || root->op == OR)
 		return ; //handle_background(root, msh);
- 	else
- 	{
+	else
+	{
 		cmd = ast_to_cmd(root);
 		cmd->env = msh->env;
 		cmd->msh = msh;
@@ -85,13 +85,13 @@ int	execute_builtin(t_cmd *cmd)
 	if (ft_strcmp(cmd->cmd, "exit") == 0)
 		ft_exit(cmd);
 	else if (ft_strcmp(cmd->cmd, "pwd") == 0)
-		return ft_pwd();
+		return (ft_pwd());
 	else if (ft_strcmp(cmd->cmd, "echo") == 0)
-		return ft_echo(cmd);
+		return (ft_echo(cmd));
 	else if (ft_strcmp(cmd->cmd, "cd") == 0)
-		return ft_cd(cmd);
+		return (ft_cd(cmd));
 	else if (ft_strcmp(cmd->cmd, "env") == 0)
-		return ft_env(cmd);
+		return (ft_env(cmd));
 	return (-1);
 }
 
