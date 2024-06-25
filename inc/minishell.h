@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:43:39 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/25 13:02:01 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:41:18 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,6 @@ void	token_var_exp(t_token *head, t_msh *msh);
 char	*exp_single_var(char *token, t_msh *msh);
 char	*exp_special_var(const char *input, int *index, char *result, t_msh *msh);
 char	*exp_general_var(const char *input, int *index, char *result, t_msh *msh);
-
 
 /*                                    pipes                                  */
 pid_t	fork_first_child(t_ast *root, t_msh *msh, int pipefd[2]);

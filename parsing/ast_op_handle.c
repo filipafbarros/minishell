@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:33:38 by fibarros          #+#    #+#             */
-/*   Updated: 2024/06/25 12:59:46 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:52:32 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ t_ast	*handle_operator_ast(t_token **current_token, t_ast *root)
 			handle_redirection(current_token, new_node);
 		else
 		{
-			new_node->right = handle_right_child(current_token);
+			current_right = handle_right_child(current_token);
+			// new_node->right = handle_right_child(current_token);
 			handle_remaining_tokens(current_token, current_right);
 		}
 	}
