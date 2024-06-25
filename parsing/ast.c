@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keramos- <keramos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 13:40:58 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/14 13:46:20 by keramos-         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:32:38 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,67 +57,26 @@ t_ast	*handle_non_operator(t_token **current_token, t_ast *current_node)
 	t_ast	*new_node;
 	t_ast	*temp;
 
-	new_node = create_ast_node((*current_token)->value, (*current_token)->op);
-	if (!current_node->left)
-		current_node->left = new_node;
-	else if (!current_node->right)
-		current_node->right = new_node;
+	if (is_redirection((*current_token)->op))
+		current_node = handle_redirection(current_token, current_node);
 	else
 	{
-		temp = current_node->right;
-		while (temp->right)
-			temp = temp->right;
-		temp->right = new_node;
-	}
-	*current_token = (*current_token)->next;
-	return (current_node);
-}
-
-/*
- * Function to handle operator tokens and update the AST.
- * Takes the current token and the root of the AST as arguments.
- * Returns the updated root of the AST.
- */
-t_ast	*handle_operator_ast(t_token **current_token, t_ast *root)
-{
-	t_ast	*new_node;
-	t_ast	*current_right;
-
-	new_node = create_ast_node((*current_token)->value, (*current_token)->op);
-	new_node->left = root;
-	*current_token = (*current_token)->next;
-	if (*current_token) {
-		new_node->right = create_ast_node((*current_token)->value, (*current_token)->op);
+		new_node = create_ast_node((*current_token)->value, \
+		(*current_token)->op);
+		if (!current_node->left)
+			current_node->left = new_node;
+		else if (!current_node->right)
+			current_node->right = new_node;
+		else
+		{
+			temp = current_node->right;
+			while (temp->right)
+				temp = temp->right;
+			temp->right = new_node;
+		}
 		*current_token = (*current_token)->next;
-		current_right = new_node->right;
-
-		// Handle command arguments as left children
-		if (current_right->op == NONE && *current_token && (*current_token)->op == NONE) {
-			current_right->left = create_ast_node((*current_token)->value, (*current_token)->op);
-			*current_token = (*current_token)->next;
-		}
-
-		// Continue handling remaining tokens
-		while (*current_token) {
-			if ((*current_token)->op != NONE) {
-				current_right->right = handle_operator_ast(current_token, current_right->right);
-				break;
-			} else {
-				t_ast *arg_node = create_ast_node((*current_token)->value, (*current_token)->op);
-				if (!current_right->left) {
-					current_right->left = arg_node;
-				} else {
-			 		t_ast *temp = current_right->left;
-					while (temp->right) {
-						temp = temp->right;
-					}
-					temp->right = arg_node;
-				}
-				*current_token = (*current_token)->next;
-			}
-		}
 	}
-	return (new_node);
+	return (current_node);
 }
 
 /*
@@ -125,6 +84,7 @@ t_ast	*handle_operator_ast(t_token **current_token, t_ast *root)
  * Takes the head of the token list as an argument.
  * Returns the root of the AST.
  */
+
 t_ast	*parse_tokens_to_ast(t_token *tokens)
 {
 	t_ast	*root;
@@ -136,7 +96,9 @@ t_ast	*parse_tokens_to_ast(t_token *tokens)
 	current_token = tokens;
 	while (current_token)
 	{
-		if (current_token->op != NONE)
+		if (is_redirection(current_token->op))
+			current_node = handle_redirection(&current_token, current_node);
+		else if (current_token->op != NONE)
 			root = handle_operator_ast(&current_token, root);
 		else
 			current_node = handle_non_operator(&current_token, current_node);

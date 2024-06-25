@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:43:39 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/21 11:53:41 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/06/25 13:02:01 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,9 @@ t_ast	*init_ast(t_token **tokens);
 t_ast	*handle_non_operator(t_token **current_token, t_ast *current_node);
 t_ast	*handle_operator_ast(t_token **current_token, t_ast *root);
 t_ast	*parse_tokens_to_ast(t_token *tokens);
+t_ast	*create_operator_node(t_token **current_token, t_ast *ast_node);
+t_ast	*handle_right_child(t_token **current_token);
+void	handle_remaining_tokens(t_token **token, t_ast *right);
 
 /*                                    src                                     */
 
@@ -205,6 +208,9 @@ pid_t	fork_second_child(t_ast *root, t_msh *msh, int pipefd[2]);
 void	execute_pipe(t_ast *root, t_msh *msh);
 
 // Redirection Handling Functions
+int		is_redirection(t_op op);
+t_ast	*handle_redirection(t_token **current_token, t_ast *current_node);
+
 //void	handle_redirection(t_ast *root, t_msh *msh);
 
 // Background Execution Functions
