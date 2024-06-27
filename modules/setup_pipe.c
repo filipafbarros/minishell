@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 14:35:09 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/21 10:44:33 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:43:11 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	execute_pipe(t_ast *root, t_msh *msh)
 	pid_t	p1;
 	pid_t	p2;
 
+	if (pipe(pipefd) == -1)
+		ft_error("pipe");
 	p1 = fork_first_child(root, msh, pipefd);
 	p2 = fork_second_child(root, msh, pipefd);
 	close(pipefd[0]);

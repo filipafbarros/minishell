@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keramos- <keramos-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 14:18:00 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/09 20:24:59 by keramos-         ###   ########.fr       */
+/*   Updated: 2024/06/27 11:57:02 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ char	*extract_token(char **input)
 	}
 	else
 	{
-		while (**input && !ft_isspace(**input) && **input != '\'' && **input != '\"')
+		while (**input && !ft_isspace(**input) && **input != '\'' && \
+		**input != '\"')
 			(*input)++;
 	}
 	token = ft_strndup(start, *input - start);
@@ -148,3 +149,24 @@ char	*remove_quotes(const char *token)
 		cleaned_token = ft_strndup(token, len);
 	return (cleaned_token);
 }
+
+/*
+		Just writing this down just in case the tokenization needs a little extra
+		because of the redirection:
+
+	Tokenization with redirection:
+		The overall format used for redirection is: 
+					[n]redir-op word
+		The number n is an optional decimal number designating the file descriptor 
+		number; the application shall ensure it is delimited from any preceding 
+		text and immediately precede the redirection operator redir-op. 
+		If n is quoted, the number shall not be recognized as part of the 
+		redirection expression. For example:
+					echo \2>a
+		writes the character 2 into file a. If any part of redir-op is quoted, no redirection
+		expression is recognized. For example:
+					echo 2\>a
+		writes the characters 2>a to standard output. The optional number, redirection 
+		operator, and word shall not appear in the arguments provided to the command 
+		to be executed (if any).
+*/
