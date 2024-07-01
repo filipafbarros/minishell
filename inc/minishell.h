@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:43:39 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/25 14:41:18 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:03:32 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ typedef struct s_ast
 	struct s_ast	*left;
 	struct s_ast	*right;
 }		t_ast;
+
+typedef struct s_redir
+{
+	
+}	t_redir;
+
 
 /*
  * Structure representing a token in the input string.
