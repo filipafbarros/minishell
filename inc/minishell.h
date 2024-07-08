@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:43:39 by keramos-          #+#    #+#             */
-/*   Updated: 2024/06/28 14:03:32 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:27:59 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef enum e_op
  */
 typedef struct s_msh
 {
+	t_env	*env_list;
 	char	**env;
 	int		exit_status;
 }		t_msh;
@@ -73,6 +74,7 @@ typedef struct s_msh
  * its arguments.
  * - env: Array of environment variables relevant to the command.
  * - argc: The number of arguments in the tokens array.
+ * - redirs: a pointer to the linked list of redirections
  * - next: Pointer to the next command in a pipeline. This is used to chain
  * commands together.
  * - prev: Pointer to the previous command in a pipeline.
@@ -83,8 +85,10 @@ typedef struct s_cmd
 	char			**tokens;
 	t_msh			*msh;
 	char			**env;
+	t_env			*env_list;
 	int				argc;
 	int				exit_status;
+	t_redir			*redirs;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }		t_cmd;
@@ -108,11 +112,23 @@ typedef struct s_ast
 	struct s_ast	*right;
 }		t_ast;
 
+
+
 typedef struct s_redir
 {
-	
+	t_op			op;
+	char			*file;
+	struct s_redir	*next;
 }	t_redir;
 
+
+
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}		t_env;
 
 /*
  * Structure representing a token in the input string.

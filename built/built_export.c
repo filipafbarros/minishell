@@ -6,25 +6,37 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:23:29 by fibarros          #+#    #+#             */
-/*   Updated: 2024/07/01 11:09:16 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/07/05 16:32:06 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// could also use the t_msh msh ?
+
+
 void	ft_export(t_cmd command)
 {
-	
+    /*
+        tokens
+        
+    */
+    
+	/*
+        * if no args, print all vars;
+        * if there are args, each arg should be a potential env variable to be added 
+        to the linked list
+        * if var already exists, we have to update the list and only if it's assigned
+        if the var doesnt exist, create a new node in the envp linked list 
+    
+    */
 }
 
-// should we do a quit_minishell function or something?
+// print_all_exported_vars (t_env *env)
 
-t_list	*sort_env(t_list *env)
-{
-	t_list	*sorted_list;
+// update env var
 
-	sorted_list = ft_lstdup(env);
-	if (!sorted_list)
-		return (EXIT_FAILURE);
-	
-}
+// create env var
+
+// get sorted list
+
