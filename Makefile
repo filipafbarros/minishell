@@ -6,7 +6,7 @@
 #    By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 17:06:07 by keramos-          #+#    #+#              #
-#    Updated: 2024/06/25 14:42:24 by fibarros         ###   ########.fr        #
+#    Updated: 2024/07/08 11:49:11 by fibarros         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,12 +65,12 @@ endef
 
 SRCS = minishell.c \
 	utils/input.c utils/intro_art.c utils/utils.c utils/checks.c \
-	utils/erro.c utils/free.c utils/print_ast.c \
+	utils/erro.c utils/free.c utils/print_ast.c utils/init_env.c utils/init_env_utils.c \
 	parsing/ast.c parsing/token.c parsing/ast_op_handle.c parsing/redirection.c \
 	built/built_cd.c built/built_echo.c built/built_pwd.c built/built_exit.c \
 	built/built_env.c \
 	src/cmd_execute.c src/execute.c src/process.c src/path.c \
-	modules/var_exp.c modules/var_utils.c modules/setup_pipe.c
+	modules/var_exp.c modules/var_utils.c modules/setup_pipe.c \
 
 OBJS = $(SRCS:.c=.o)
 

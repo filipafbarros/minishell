@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:23:29 by fibarros          #+#    #+#             */
-/*   Updated: 2024/07/05 16:32:06 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:54:20 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // could also use the t_msh msh ?
 
 
-void	ft_export(t_cmd command)
+// void	ft_export(t_cmd command)
 {
     /*
         tokens

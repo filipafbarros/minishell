@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:48:37 by fibarros          #+#    #+#             */
-/*   Updated: 2024/07/08 11:41:58 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:51:04 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	*init_env(t_msh *msh, char **envp)
 		perror("Allocation error");
 		exit(EXIT_FAILURE);
 	}
+	return (NULL);
 }
 
 int	init_arr_and_list(t_msh *msh, char **envp)

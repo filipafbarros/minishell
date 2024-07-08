@@ -6,7 +6,7 @@
 /*   By: fibarros <fibarros@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:43:39 by keramos-          #+#    #+#             */
-/*   Updated: 2024/07/01 16:27:59 by fibarros         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:48:41 by fibarros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,22 @@ typedef enum e_op
  * - env: Array of environment variables.
  * - exit_status: The exit status of the last executed command.
  */
+
+typedef struct s_redir
+{
+	t_op			op;
+	char			*file;
+	struct s_redir	*next;
+}	t_redir;
+
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}		t_env;
+
+
 typedef struct s_msh
 {
 	t_env	*env_list;
@@ -113,23 +129,6 @@ typedef struct s_ast
 }		t_ast;
 
 
-
-typedef struct s_redir
-{
-	t_op			op;
-	char			*file;
-	struct s_redir	*next;
-}	t_redir;
-
-
-
-typedef struct s_env
-{
-	char			*name;
-	char			*value;
-	struct s_env	*next;
-}		t_env;
-
 /*
  * Structure representing a token in the input string.
  * Tokens are used to break down the input string into manageable parts
@@ -175,6 +174,15 @@ char	*get_dir(t_cmd *cmd, char *prev_dir);
 
 char	*find_path(char *cmd, char **env);
 char	*get_path(char *cmd, char **paths);
+
+/*									env										  */
+void	*init_env(t_msh *msh, char **envp);
+int		init_arr_and_list(t_msh *msh, char **envp);
+t_env	*create_env_node(const char *env_str);
+void	add_env_node(t_env **env_list, t_env *node);
+int		array_len(char **arr);
+void	free_env(t_msh *msh);
+void	free_env_list(t_env *env_list);
 
 /*                                   BUILT                                    */
 
